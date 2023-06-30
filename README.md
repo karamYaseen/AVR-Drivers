@@ -10,4 +10,4 @@ This repository can be useful to anyone in the process of learning Embedded Syst
 1. DIO peripheral (MCAL Layer)
 2. LCD module (HAL Layer)
 
-<h4 align='center'>Made with :heart:</h4>
+<h4 align='center'>Made with KAY :heart:</h4>
