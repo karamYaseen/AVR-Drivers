@@ -8,8 +8,9 @@
 
 #ifndef LCD_Interface_H
 #define LCD_Interface_H
-#include "../../lib/STD_TYPES.h"
-#include "../../lib/Error_State.h"
+
+#include "../../LIB/STD_TYPES.h"
+#include "../../LIB/Error_State.h"
 
 #define LCD_u8_CHAR0                          0
 #define LCD_u8_CHAR1                          1

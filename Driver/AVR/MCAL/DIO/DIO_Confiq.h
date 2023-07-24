@@ -42,7 +42,7 @@
 #define DIO_u8_PC6_INITIAL_DIRECTION                    DIO_u8_INITIAL_INPUT
 #define DIO_u8_PC7_INITIAL_DIRECTION                    DIO_u8_INITIAL_INPUT
 
-/************************     PORTC      ************************/
+/************************     PORTD      ************************/
 #define DIO_u8_PD0_INITIAL_DIRECTION                    DIO_u8_INITIAL_OUTPUT
 #define DIO_u8_PD1_INITIAL_DIRECTION                    DIO_u8_INITIAL_OUTPUT
 #define DIO_u8_PD2_INITIAL_DIRECTION                    DIO_u8_INITIAL_OUTPUT

@@ -8,8 +8,8 @@
 #ifndef DIO_INTERFACE_H
 #define DIO_INTERFACE_H
 
-#include "../../lib/Error_State.h"
-#include "../../lib/STD_TYPES.h"
+#include "../../LIB/Error_State.h"
+#include "../../LIB/STD_TYPES.h"
 
 /* =========================================================================================== */
 /*                                Macros DEfinitions                                           */ 
@@ -47,7 +47,7 @@
 /*                                Function modules                                             */
 /* =========================================================================================== */
    
-    ES_t DIO_enu_Init                   (void);
+    ES_t DIO_enu_Init                        (void);
 
     ES_t  DIO_enu_SetPinDirection            (u8 Copy_u8_PortId,u8 Copy_u8_PinId,u8 Copy_u8_PinDirection);
 

@@ -16,4 +16,16 @@
 #define BIT_TOG(REG, BIT_NUM)   	 ( (REG) ^=   (1 << ((BIT_NUM)))  ) /* Sets the bits as '~BIT' */
 #define BIT_GET(REG, BIT_NUM)   	 ( (REG)  &   (1 << (BIT_NUM))    ) /* Reads the bit  		   */
 
+
+
+#define MASK_BIT                     1
+#define SHIFT_0BIT                  0
+#define SHIFT_1BIT                  1
+#define SHIFT_2BIT                  2
+#define SHIFT_3BIT                  3
+#define SHIFT_4BIT                  4
+#define SHIFT_5BIT                  5
+#define SHIFT_6BIT                  6
+#define SHIFT_7BIT                  7
+
 #endif

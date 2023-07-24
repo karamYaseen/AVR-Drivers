@@ -11,24 +11,21 @@
        high for data, and low for instruction.
 */
 
-#include "../../lib/Error_State.h"
-#include "../../lib/STD_TYPES.h"
-
-#include "../../MCAL/DIO/DIO_interface.h"
-#include "../../MCAL/DIO/DIO_Private.h"
+#include "../../LIB/Error_State.h"
+#include "../../LIB/STD_TYPES.h"
+#include "../../MCAL/DIO/DIO_Interface.h"
 
 #include "LCD_Confiq.h"
 #include "LCD_Private.h"
 
 #define F_CPU 8000000UL
-
 #include <util/delay.h>
 
 
 ES_t LCD_enu_SendCommand  (u8 Copy_u8_command)
  {
-if (COPY_MODE_flag==LCD_u8_8BIT_MODE)
-{
+#if COPY_MODE_flag == LCD_u8_8BIT_MODE
+
 	/*RS=0*/
 	DIO_enu_SetPinValue(LCD_u8_CONTROL_PORT,LCD_u8_RS_PIN,DIO_u8_LOW);
 	/*RW=0*/
@@ -39,9 +36,9 @@ if (COPY_MODE_flag==LCD_u8_8BIT_MODE)
 	DIO_enu_SetPinValue(LCD_u8_CONTROL_PORT,LCD_u8_E_PIN,DIO_u8_HIGH);
 	_delay_us(2);
 	DIO_enu_SetPinValue(LCD_u8_CONTROL_PORT,LCD_u8_E_PIN,DIO_u8_LOW);
+	return STD_TYPES_OK;
 
-}
-else if ( COPY_MODE_flag == LCD_u8_4BIT_MODE) {
+#elif  COPY_MODE_flag == LCD_u8_4BIT_MODE
 
 
     DIO_enu_SetPinValue(LCD_u8_CONTROL_PORT,LCD_u8_RS_PIN,DIO_u8_LOW);
@@ -61,9 +58,9 @@ else if ( COPY_MODE_flag == LCD_u8_4BIT_MODE) {
     _delay_us(2);
 
      DIO_enu_SetPinValue(LCD_u8_CONTROL_PORT,LCD_u8_E_PIN,DIO_u8_LOW );
-}
-	return STD_TYPES_OK;
 
+	return STD_TYPES_OK;
+#endif
 }
 
 ES_t LCD_enu_Init_8bit_Mode(void)
@@ -71,10 +68,10 @@ ES_t LCD_enu_Init_8bit_Mode(void)
 
 /*Directions of Rs-Rw-E*/
 	
-	DIO_enu_SetPinDirection(LCD_u8_CONTROL_PORT,LCD_u8_RS_PIN,DIO_u8_INITIAL_OUTPUT);
-	DIO_enu_SetPinDirection(LCD_u8_CONTROL_PORT,LCD_u8_RW_PIN,DIO_u8_INITIAL_OUTPUT);
-	DIO_enu_SetPinDirection(LCD_u8_CONTROL_PORT,LCD_u8_E_PIN,DIO_u8_INITIAL_OUTPUT);
-	DIO_enu_SetPortDirection(LCD_u8_DATA_PORT,DIO_u8_INITIAL_OUTPUT);
+	DIO_enu_SetPinDirection(LCD_u8_CONTROL_PORT,LCD_u8_RS_PIN,DIO_u8_OUTPUT);
+	DIO_enu_SetPinDirection(LCD_u8_CONTROL_PORT,LCD_u8_RW_PIN,DIO_u8_OUTPUT);
+	DIO_enu_SetPinDirection(LCD_u8_CONTROL_PORT,LCD_u8_E_PIN,DIO_u8_OUTPUT);
+	DIO_enu_SetPortDirection(LCD_u8_DATA_PORT,DIO_u8_OUTPUT);
 
 	
 	DIO_enu_SetPinValue(LCD_u8_CONTROL_PORT,LCD_u8_RS_PIN,DIO_u8_LOW);
@@ -102,10 +99,10 @@ ES_t LCD_enu_Init_4bit_Mode(void)
 {
 	/*Set directions for DIO connected to LCD*/
 
-	DIO_enu_SetPinDirection(LCD_u8_CONTROL_PORT,LCD_u8_RS_PIN,DIO_u8_INITIAL_OUTPUT);
-	DIO_enu_SetPinDirection(LCD_u8_CONTROL_PORT,LCD_u8_RW_PIN,DIO_u8_INITIAL_OUTPUT);
-	DIO_enu_SetPinDirection(LCD_u8_CONTROL_PORT,LCD_u8_E_PIN,DIO_u8_INITIAL_OUTPUT);
-	DIO_enu_SetPortDirection(LCD_u8_DATA_PORT,DIO_u8_INITIAL_OUTPUT);
+	DIO_enu_SetPinDirection(LCD_u8_CONTROL_PORT,LCD_u8_RS_PIN,DIO_u8_OUTPUT);
+	DIO_enu_SetPinDirection(LCD_u8_CONTROL_PORT,LCD_u8_RW_PIN,DIO_u8_OUTPUT);
+	DIO_enu_SetPinDirection(LCD_u8_CONTROL_PORT,LCD_u8_E_PIN,DIO_u8_OUTPUT);
+	DIO_enu_SetPortDirection(LCD_u8_DATA_PORT,DIO_u8_OUTPUT);
 
 
 	DIO_enu_SetPinValue(LCD_u8_CONTROL_PORT,LCD_u8_RS_PIN,DIO_u8_LOW);
@@ -140,8 +137,8 @@ ES_t LCD_enu_Init_4bit_Mode(void)
 
 ES_t LCD_enu_WriteCharacter(u8 Copy_u8_char)
 {
-	if (COPY_MODE_flag==LCD_u8_8BIT_MODE)
-	{
+#if COPY_MODE_flag==LCD_u8_8BIT_MODE
+
 	DIO_enu_SetPinValue(LCD_u8_CONTROL_PORT,LCD_u8_RS_PIN,DIO_u8_HIGH);
 
 	DIO_enu_SetPinValue(LCD_u8_CONTROL_PORT,LCD_u8_RW_PIN,DIO_u8_LOW);
@@ -153,9 +150,8 @@ ES_t LCD_enu_WriteCharacter(u8 Copy_u8_char)
     
 	DIO_enu_SetPinValue(LCD_u8_CONTROL_PORT,LCD_u8_E_PIN,DIO_u8_LOW);
 //	_delay_ms(5);
-	}
-
-	else if ( COPY_MODE_flag == LCD_u8_4BIT_MODE) {
+	return STD_TYPES_OK;
+#elif COPY_MODE_flag == LCD_u8_4BIT_MODE
 
 	DIO_enu_SetPinValue(LCD_u8_CONTROL_PORT,LCD_u8_RS_PIN,DIO_u8_HIGH);
 
@@ -174,10 +170,11 @@ ES_t LCD_enu_WriteCharacter(u8 Copy_u8_char)
 	_delay_us(1);
 	/* E = 0 */
 	DIO_enu_SetPinValue(LCD_u8_CONTROL_PORT,LCD_u8_E_PIN,DIO_u8_LOW );
-	}
-	return STD_TYPES_OK;
 
-}
+	return STD_TYPES_OK;
+#endif
+
+	}
 
 ES_t LCD_enu_WriteString(s8 * Copy_ps8_String)
  {	
