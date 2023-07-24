@@ -2,13 +2,13 @@
 
 ## Table of Contents
 1. [Introduction](#introduction)
-2. [Support and Contact](#support-and-contact)
-3. [Stepper Motor Driver](#stepper-motor-driver)
-4. [LCD Driver](#lcd-driver)
-5. [Keypad Driver](#keypad-driver)
-6. [DC Motor Driver](#dc-motor-driver)
-7. [Digital I/O (DIO) Driver](#digital-io-driver)
-8. [Usage](#usage)
+2. [Stepper Motor Driver](#stepper-motor-driver)
+3. [LCD Driver](#lcd-driver)
+4. [Keypad Driver](#keypad-driver)
+5. [DC Motor Driver](#dc-motor-driver)
+6. [Digital I/O (DIO) Driver](#digital-io-driver)
+7. [Usage](#usage)
+8. [Support and Contact](#support-and-contact)
 
 ---
 
@@ -103,11 +103,11 @@ To use any of the drivers, follow these steps:
 
 **Note:** You can easily customize the drivers for your specific setup by changing the configuration settings in the configuration header files. Once the drivers are configured, you can simply change the pins and other settings in the configuration files and start using them in your projects.
 
-We encourage you to follow a layered architecture approach in your project. You can arrange the drivers based on the specific layer they belong to. For example:
+I encourage you to follow a layered architecture approach in your project. You can arrange the drivers based on the specific layer they belong to. For example:
 
-- **HAL (Hardware Abstraction Layer):** LCD Driver, Keypad Driver
-- **MCAL (Microcontroller Abstraction Layer):** Digital I/O Driver, DC Motor Driver
-- **SWC (Software Component):** Stepper Motor Driver
+- **HAL (Hardware Abstraction Layer):** LCD Driver, Keypad Driver, DC Motor Driver,Stepper Motor Driver
+- **MCAL (Microcontroller Abstraction Layer):** Digital I/O Driver
+- **SWC (Software Component):** 
 
 Feel free to modify and improve these drivers according to your project's requirements and the specific layer they belong to.
 
