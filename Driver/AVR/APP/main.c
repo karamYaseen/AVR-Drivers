@@ -23,6 +23,7 @@ int main()
     char Local_Achar_enteredPassword[PASSWORD_LENGTH + 1] = {0};
     u8 Local_u8_passwordIndex = 0;
     u8 Local_u8_numoftry = 0;
+
     while (1)
     {
         u8 Local_u8_key;
@@ -128,25 +129,32 @@ int main()
 
     return 0;
 }
-void takeUserOption_1(u8 *option){
-	while(1){
-		KPD_enu_GetKey(option);
-		if(*option == '1' || *option == '2' || *option == '3' || *option == 'C')
-			break;
-	}
+
+void takeUserOption_1(u8 *option)
+{
+    while (1)
+    {
+        KPD_enu_GetKey(option);
+        if (*option == '1' || *option == '2' || *option == '3' || *option == 'C')
+            break;
+    }
 }
 
-u8 KPD_enu_GetNumberInput() {
+u8 KPD_enu_GetNumberInput()
+{
     u8 inputLength = 0;
     u8 digits[3] = {0}; // Array to store the digits of the number
 
-    while (inputLength < 3) {
+    while (inputLength < 3)
+    {
         u8 key = KPD_U8_UNPRESED;
-        while (key == KPD_U8_UNPRESED) {
+        while (key == KPD_U8_UNPRESED)
+        {
             KPD_enu_GetKey(&key);
         }
 
-        if (key >= '0' && key <= '9') {
+        if (key >= '0' && key <= '9')
+        {
             digits[inputLength] = key - '0'; // Convert ASCII digit to numerical digit
             inputLength++;
         }
@@ -156,102 +164,123 @@ u8 KPD_enu_GetNumberInput() {
     u16 result = digits[0] * 100 + digits[1] * 10 + digits[2];
     return result;
 }
-void ControlDCMotor() {
+
+void ControlDCMotor()
+{
     LCD_enu_Clear();
     LCD_enu_WriteString("1: CW  2: CCW");
     u8 Local_u8_key;
     takeUserOption_1(&Local_u8_key);
 
-    if (Local_u8_key == '1') {
+    if (Local_u8_key == '1')
+    {
         // Clockwise rotation
         LCD_enu_Clear();
         LCD_enu_WriteString(" CW ");
-    	DC_Motor_enu_Rotate(1);
-    	while(1){
-    	u8 Local_u8_key3;
-        takeUserOption_1(&Local_u8_key3);
-        if (Local_u8_key3=='C')
-        	{
-        		LCD_enu_Clear();
-        		DC_Motor_enu_Stop();
-        		break;
-        	}
-}
-    } else if (Local_u8_key == '2') {
+        DC_Motor_enu_Rotate(1);
+        while (1)
+        {
+            u8 Local_u8_key3;
+            takeUserOption_1(&Local_u8_key3);
+            if (Local_u8_key3 == 'C')
+            {
+                LCD_enu_Clear();
+                DC_Motor_enu_Stop();
+                break;
+            }
+        }
+    }
+    else if (Local_u8_key == '2')
+    {
         // Counterclockwise rotation
         LCD_enu_Clear();
         LCD_enu_WriteString(" CCW ");
-    	DC_Motor_enu_Rotate(0);
-    	while(1){
-    	u8 Local_u8_key3;
-        takeUserOption_1(&Local_u8_key3);
-        if (Local_u8_key3=='C')
-    	{
-            LCD_enu_Clear();
-    		DC_Motor_enu_Stop();
-    		break;
-    	}
-    	}
-    } else {
+        DC_Motor_enu_Rotate(0);
+        while (1)
+        {
+            u8 Local_u8_key3;
+            takeUserOption_1(&Local_u8_key3);
+            if (Local_u8_key3 == 'C')
+            {
+                LCD_enu_Clear();
+                DC_Motor_enu_Stop();
+                break;
+            }
+        }
+    }
+    else
+    {
         LCD_enu_Clear();
         LCD_enu_WriteString("Invalid Direction");
         _delay_ms(1000);
     }
 }
-void ControlStepperMotor() {
+
+void ControlStepperMotor()
+{
     LCD_enu_Clear();
     LCD_enu_WriteString("1: CW  2: CCW");
     u8 Local_u8_key;
     takeUserOption_1(&Local_u8_key);
 
-    if (Local_u8_key == '1') {
+    if (Local_u8_key == '1')
+    {
         // Clockwise rotation
         LCD_enu_Clear();
         LCD_enu_WriteString("Angel: in (3DIG) ");
-		LCD_enu_GoToXY(1,0);
-		LCD_enu_WriteString("EX: 090 ");
-		u8 Local_u8_Angle = KPD_enu_GetNumberInput();
+        LCD_enu_GoToXY(1, 0);
+        LCD_enu_WriteString("EX: 090 ");
+        u8 Local_u8_Angle = KPD_enu_GetNumberInput();
         _delay_ms(100);
         LCD_enu_Clear();
-		LCD_enu_WriteString("Angle is :" );
-		LCD_enu_GoToXY(1,0);
-		LCD_enu_WriteNumber(Local_u8_Angle);
-		StepperMotor_enu_Move(Local_u8_Angle,1);
-		while(1){
-		    	u8 Local_u8_key3;
-		        takeUserOption_1(&Local_u8_key3);
-		        if (Local_u8_key3=='C')
-		    	{
-		            LCD_enu_Clear();
-		        	Stepper_enu_Stop();
-		    		break;
-		    	}
-		    	}
-    } else if (Local_u8_key == '2') {
+        LCD_enu_WriteString("Angle is :");
+        LCD_enu_GoToXY(1, 0);
+        LCD_enu_WriteNumber(Local_u8_Angle);
+        StepperMotor_enu_Move(Local_u8_Angle, 1);
+
+        while (1)
+        {
+            u8 Local_u8_key3;
+            takeUserOption_1(&Local_u8_key3);
+
+            if (Local_u8_key3 == 'C')
+            {
+                LCD_enu_Clear();
+                Stepper_enu_Stop();
+                break;
+            }
+        }
+    }
+    else if (Local_u8_key == '2')
+    {
         // Counterclockwise rotation
         LCD_enu_Clear();
         LCD_enu_WriteString("Angel: in (3DIG) ");
-        LCD_enu_GoToXY(1,0);
+        LCD_enu_GoToXY(1, 0);
         LCD_enu_WriteString("EX: 090 ");
-        u16 Local_u8_Angle = KPD_enu_GetNumberInput();
+        u8 Local_u8_Angle = KPD_enu_GetNumberInput();
         _delay_ms(100);
-		LCD_enu_Clear();
-		LCD_enu_WriteString("Angle is :" );
-		LCD_enu_GoToXY(1,0);
-		LCD_enu_WriteNumber(Local_u8_Angle);
-        StepperMotor_enu_Move(Local_u8_Angle,0);
-        while(1){
-            	u8 Local_u8_key3;
-                takeUserOption_1(&Local_u8_key3);
-                if (Local_u8_key3=='C')
-            	{
-		            LCD_enu_Clear();
-                	Stepper_enu_Stop();
-            		break;
-            	}
-            	}
-    } else {
-        // Invalid direction, display an error message
+        LCD_enu_Clear();
+        LCD_enu_WriteString("Angle is :");
+        LCD_enu_GoToXY(1, 0);
+        LCD_enu_WriteNumber(Local_u8_Angle);
+        StepperMotor_enu_Move(Local_u8_Angle, 0);
+
+        while (1)
+        {
+            u8 Local_u8_key3;
+            takeUserOption_1(&Local_u8_key3);
+
+            if (Local_u8_key3 == 'C')
+            {
+                LCD_enu_Clear();
+                Stepper_enu_Stop();
+                break;
+            }
+        }
+    }
+    else
+    {
         LCD_enu_Clear();
         LCD_enu_WriteString("Invalid Direction");
         _delay_ms(1000);
