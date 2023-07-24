@@ -1,4 +1,4 @@
-# AVR Drivers - README
+# AVR Drivers - ATMEGA32
 
 ## Table of Contents
 1. [Introduction](#introduction)
