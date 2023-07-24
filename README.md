@@ -2,31 +2,42 @@
 
 ## Table of Contents
 1. [Introduction](#introduction)
-2. [Stepper Motor Driver](#stepper-motor-driver)
-3. [LCD Driver](#lcd-driver)
-4. [Keypad Driver](#keypad-driver)
-5. [DC Motor Driver](#dc-motor-driver)
-6. [Digital I/O (DIO) Driver](#digital-io-driver)
-7. [Usage](#usage)
+2. [Support and Contact](#support-and-contact)
+3. [Stepper Motor Driver](#stepper-motor-driver)
+4. [LCD Driver](#lcd-driver)
+5. [Keypad Driver](#keypad-driver)
+6. [DC Motor Driver](#dc-motor-driver)
+7. [Digital I/O (DIO) Driver](#digital-io-driver)
+8. [Usage](#usage)
 
 ---
 
 ## Introduction
-This repository contains a collection of AVR drivers to interface with various peripherals. The drivers are designed to be easy to use and can be customized by changing the configuration settings in the corresponding header files.
+Welcome to the AVR Drivers repository! This collection of AVR drivers provides you with easy-to-use interfaces to interact with various peripherals in your AVR microcontroller-based projects. The drivers are designed to be highly configurable and can be easily customized to suit your specific project requirements.
+
+Please feel free to explore the different drivers provided and don't hesitate to contact us if you need any assistance or have any questions.
+
+---
+
+## Support and Contact
+If you encounter any issues, need help with using the drivers, or have any questions, please don't hesitate to reach out to us:
+
+- **Email:** [your_email@example.com](mailto:your_email@example.com)
+- **GitHub Repository:** [your_github_repository](https://github.com/your_username/your_repository)
+
+We are committed to providing excellent support and assistance throughout your project development journey.
 
 ---
 
 ## <span style="color: blue">Stepper Motor Driver</span>
 
 ### Description
-The Stepper Motor Driver provides functions to control a stepper motor's movement. It includes initialization, moving the motor to a specified angle and direction, and stopping the motor.
+The Stepper Motor Driver provides functions to control the movement of a stepper motor. It includes initialization, moving the motor to a specified angle and direction, and stopping the motor.
 
 ### Functions
-| Function Name                      | Description                                          | Input Parameters                          | Output Parameters    |
-|------------------------------------|------------------------------------------------------|-------------------------------------------|----------------------|
-| StepperMotor_enu_Init              | Initialize the stepper motor driver.                | None                                      | Error State          |
-| StepperMotor_enu_Move              | Move the stepper motor to a specified angle and direction. | Copy_u16_STeeperangle (angle value), Copy_u8_STeeperdirection (direction) | Error State          |
-| Stepper_enu_Stop                   | Stop the stepper motor.                             | None                                      | Error State          |
+- `ES_t StepperMotor_enu_Init(void);`
+- `ES_t StepperMotor_enu_Move(u16 Copy_u16_STeeperangle, u8 Copy_u8_STeeperdirection);`
+- `ES_t Stepper_enu_Stop(void);`
 
 ---
 
@@ -36,20 +47,18 @@ The Stepper Motor Driver provides functions to control a stepper motor's movemen
 The LCD Driver provides functions to interface with an LCD in both 8-bit and 4-bit modes. It supports writing characters, strings, numbers, moving the cursor, and creating custom characters on the LCD.
 
 ### Functions
-| Function Name                      | Description                                          | Input Parameters                          | Output Parameters    |
-|------------------------------------|------------------------------------------------------|-------------------------------------------|----------------------|
-| LCD_enu_Init_8bit_Mode             | Initialize the LCD in 8-bit mode.                   | None                                      | Error State          |
-| LCD_enu_Init_4bit_Mode             | Initialize the LCD in 4-bit mode.                   | None                                      | Error State          |
-| LCD_enu_SendCommand                | Send a command to the LCD.                          | Copy_u8_command (LCD command)             | Error State          |
-| LCD_enu_WriteCharacter             | Write a single character to the LCD.               | Copy_u8_char (character to be written)    | Error State          |
-| LCD_enu_WriteString                | Write a null-terminated string to the LCD.          | Copy_ps8_String (pointer to the string)   | Error State          |
-| LCD_enu_WriteSizedString           | Write a string with a specified length to the LCD.  | Copy_ps8_String (pointer to the string), Copy_u8_size (length of the string) | Error State          |
-| LCD_enu_WriteNumber                | Write an integer number to the LCD.                 | Copy_u16_Number (number to be written)    | Error State          |
-| LCD_enu_WriteSizedNumber           | Write an integer number with a specified number of digits to the LCD. | Copy_u16_Number (number to be written), Copy_u8_size (number of digits) | Error State          |
-| LCD_enu_GoToXY                     | Move the cursor to a specified position on the LCD. | Copy_u8_LineNumber (line number), Copy_u8_Location (cursor position) | Error State          |
-| LCD_enu_CreateCustomChar           | Create a custom character on the LCD.               | Copy_pu8_Char (array representing the character), Copy_u8_Location (character location) | Error State          |
-| LCD_vidClearSpace                  | Clear a range of characters on the LCD.             | Copy_u8_xPosStart (start position), Copy_u8_xPosEnd (end position), Copy_u8_yPos (line number) | Error State          |
-| LCD_enu_Clear                      | Clear the entire LCD screen.                        | None                                      | Error State          |
+- `ES_t LCD_enu_Init_8bit_Mode(void);`
+- `ES_t LCD_enu_Init_4bit_Mode(void);`
+- `ES_t LCD_enu_SendCommand(u8 Copy_u8_command);`
+- `ES_t LCD_enu_WriteCharacter(u8 Copy_u8_char);`
+- `ES_t LCD_enu_WriteString(s8 * Copy_ps8_String);`
+- `ES_t LCD_enu_WriteSizedString(s8 * Copy_ps8_String, u8 Copy_u8_size);`
+- `ES_t LCD_enu_WriteNumber(u16 Copy_u16_Number);`
+- `ES_t LCD_enu_WriteSizedNumber(u16 Copy_u16_Number, u8 Copy_u8_size);`
+- `ES_t LCD_enu_GoToXY(u8 Copy_u8_LineNumber, u8 Copy_u8_Location);`
+- `ES_t LCD_enu_CreateCustomChar(u8 * Copy_pu8_Char, u8 Copy_u8_Location);`
+- `ES_t LCD_vidClearSpace(u8 Copy_u8_xPosStart, u8 Copy_u8_xPosEnd, u8 Copy_u8_yPos);`
+- `ES_t LCD_enu_Clear(void);`
 
 ---
 
@@ -59,10 +68,8 @@ The LCD Driver provides functions to interface with an LCD in both 8-bit and 4-b
 The Keypad Driver provides functions to interface with a keypad and get key press inputs.
 
 ### Functions
-| Function Name                      | Description                                          | Input Parameters                          | Output Parameters    |
-|------------------------------------|------------------------------------------------------|-------------------------------------------|----------------------|
-| KPD_enu_GetKey                     | Get a key press from the keypad.                    | Copy_pu8_ReturnKey (pointer to store the key) | Error State          |
-| KeyPad_enu_Init                    | Initialize the keypad driver.                       | None                                      | Error State          |
+- `ES_t KPD_enu_GetKey(u8 *Copy_pu8_ReturnKey);`
+- `ES_t KeyPad_enu_Init(void);`
 
 ---
 
@@ -72,11 +79,9 @@ The Keypad Driver provides functions to interface with a keypad and get key pres
 The DC Motor Driver provides functions to control the rotation of a DC motor. It includes initialization, rotating the motor in a specified direction, and stopping the motor.
 
 ### Functions
-| Function Name                      | Description                                          | Input Parameters                          | Output Parameters    |
-|------------------------------------|------------------------------------------------------|-------------------------------------------|----------------------|
-| DC_Motor_enu_Init                  | Initialize the DC motor driver.                     | None                                      | Error State          |
-| DC_Motor_enu_Rotate                | Rotate the DC motor in a specified direction.       | Copy_u8_Direction (rotation direction)    | Error State          |
-| DC_Motor_enu_Stop                  | Stop the DC motor.                                  | None                                      | Error State          |
+- `ES_t DC_Motor_enu_Init(void);`
+- `ES_t DC_Motor_enu_Rotate(u8 Copy_u8_Direction);`
+- `ES_t DC_Motor_enu_Stop(void);`
 
 ---
 
@@ -86,17 +91,15 @@ The DC Motor Driver provides functions to control the rotation of a DC motor. It
 The Digital I/O (DIO) Driver provides functions to initialize, set the direction, set the value, and read the value of digital I/O pins.
 
 ### Functions
-| Function Name                      | Description                                          | Input Parameters                          | Output Parameters    |
-|------------------------------------|------------------------------------------------------|-------------------------------------------|----------------------|
-| DIO_enu_Init                       | Initialize the digital I/O pins.                    | None                                      | Error State          |
-| DIO_enu_SetPinDirection            | Set the direction of a specific pin.                | Copy_u8_PortId (port ID), Copy_u8_PinId (pin ID), Copy_u8_PinDirection (pin direction) | Error State          |
-| DIO_enu_SetPinValue                | Set the value of a specific pin.                    | Copy_u8_PortId (port ID), Copy_u8_PinId (pin ID), Copy_u8_PinValue (pin value) | Error State          |
-| DIO_enu_GetPinValue                | Get the value of a specific pin.                    | Copy_u8_PortId (port ID), Copy_u8_PinId (pin ID), Copy_pu8_ReturnPinValue (pointer to store the pin value) | Error State          |
-| DIO_enu_GetPinDir                  | Get the direction of a specific pin.                | Copy_u8_PortId (port ID), Copy_u8_PinId (pin ID), Copy_pu8_ReturnPinDirection (pointer to store the pin direction) | Error State          |
-| DIO_enu_SetPortDirection           | Set the direction of a whole port.                  | Copy_u8_PortId (port ID), Copy_u8_PortDirection (port direction) | Error State          |
-| DIO_enu_SetPortValue               | Set the value of a whole port.                      | Copy_u8_PortId (port ID), Copy_Port_Value (port value) | Error State          |
-| DIO_enu_SetPortValue_v2            | Set the value of a whole port using binary input.   | Copy_u8_PortId (port ID), Copy_u8_PortValue (port value) | Error State          |
-| DIO_enu_GetPortValue               | Get the value of a whole port.                      | Copy_u8_PortId (port ID), Copy_pu8_ReturnPortValue (pointer to store the port value) | Error State          |
+- `ES_t DIO_enu_Init(void);`
+- `ES_t DIO_enu_SetPinDirection(u8 Copy_u8_PortId, u8 Copy_u8_PinId, u8 Copy_u8_PinDirection);`
+- `ES_t DIO_enu_SetPinValue(u8 Copy_u8_PortId, u8 Copy_u8_PinId, u8 Copy_u8_PinValue);`
+- `ES_t DIO_enu_GetPinValue(u8 Copy_u8_PortId, u8 Copy_u8_PinId, u8 *Copy_pu8_ReturnPinValue);`
+- `ES_t DIO_enu_GetPinDir(u8 Copy_u8_PortId, u8 Copy_u8_PinId, u8 *Copy_pu8_ReturnPinDirection);`
+- `ES_t DIO_enu_SetPortDirection(u8 Copy_u8_PortId, u8 Copy_u8_PortDirection);`
+- `ES_t DIO_enu_SetPortValue(u8 Copy_u8_PortId, u8 Copy_Port_Value);`
+- `ES_t DIO_enu_SetPortValue_v2(u8 Copy_u8_PortId, u8 Copy_u8_PortValue);`
+- `ES_t DIO_enu_GetPortValue(u8 Copy_u8_PortId, u8 *Copy_pu8_ReturnPortValue);`
 
 ---
 
@@ -110,8 +113,20 @@ To use any of the drivers, follow these steps:
 
 **Note:** You can easily customize the drivers for your specific setup by changing the configuration settings in the configuration header files. Once the drivers are configured, you can simply change the pins and other settings in the configuration files and start using them in your projects.
 
-Feel free to modify and improve these drivers according to your project's requirements.
+We encourage you to follow a layered architecture approach in your project. You can arrange the drivers based on the specific layer they belong to. For example:
+
+- **HAL (Hardware Abstraction Layer):** LCD Driver, Keypad Driver
+- **MCAL (Microcontroller Abstraction Layer):** Digital I/O Driver, DC Motor Driver
+- **SWC (Software Component):** Stepper Motor Driver
+
+Feel free to modify and improve these drivers according to your project's requirements and the specific layer they belong to.
 
 ---
 
-Please make sure to include detailed documentation and comments within your driver code to ensure that users can understand how to use it effectively.
+## Support and Contact
+If you have any questions, issues, or need assistance with using these drivers, feel free to contact us:
+
+- **Email:** [your_email@example.com](mailto:your_email@example.com)
+- **GitHub Repository:** [your_github_repository](https://github.com/your_username/your_repository)
+
+We are always here to help you with any problems you may encounter during your project development.
