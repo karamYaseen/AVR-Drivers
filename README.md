@@ -15,7 +15,7 @@
 ## Introduction
 Welcome to the AVR Drivers repository! This collection of AVR drivers provides you with easy-to-use interfaces to interact with various peripherals in your AVR microcontroller-based projects. The drivers are designed to be highly configurable and can be easily customized to suit your specific project requirements.
 
-Please feel free to explore the different drivers provided and don't hesitate to contact us if you need any assistance or have any questions.
+Please feel free to explore the different drivers provided and don't hesitate to contact me if you need any assistance or have any questions.
 
 ---
 
