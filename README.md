@@ -19,16 +19,6 @@ Please feel free to explore the different drivers provided and don't hesitate to
 
 ---
 
-## Support and Contact
-If you encounter any issues, need help with using the drivers, or have any questions, please don't hesitate to reach out to us:
-
-- **Email:** [your_email@example.com](mailto:your_email@example.com)
-- **GitHub Repository:** [your_github_repository](https://github.com/your_username/your_repository)
-
-We are committed to providing excellent support and assistance throughout your project development journey.
-
----
-
 ## <span style="color: blue">Stepper Motor Driver</span>
 
 ### Description
@@ -126,7 +116,7 @@ Feel free to modify and improve these drivers according to your project's requir
 ## Support and Contact
 If you have any questions, issues, or need assistance with using these drivers, feel free to contact us:
 
-- **Email:** [your_email@example.com](mailto:your_email@example.com)
-- **GitHub Repository:** [your_github_repository](https://github.com/your_username/your_repository)
+- **Email:** [karamyaseen725@gmail.com](mailto:karamyaseen725@gmail.com)
+- **GitHub Repository:** [Karam_Yaseen](https://github.com/karamyaseen/karamyaseen)
 
-We are always here to help you with any problems you may encounter during your project development.
+I'm always here to help you with any problems you may encounter during your project development.
