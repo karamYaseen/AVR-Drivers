@@ -3,7 +3,8 @@
 
 typedef enum{
 	STD_TYPES_OK,
-	STD_TYPES_NOK
+	STD_TYPES_NOK,
+	STD_TYPES_TIME_NOK
 }ES_t;
 
 #endif /* LIB_ERRORSTATE_H_ */
